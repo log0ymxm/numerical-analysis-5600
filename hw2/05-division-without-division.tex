@@ -1,0 +1,69 @@
+\textbf{Division without division:} Suppose you have a computer or calculator that has no built-in division. Come up with a fixed point iteration that converges to $1/r$ for any given non-zero number $r$, and that only uses addition, subtraction, and multiplication. \textbf{Hint:} Write down an equation satisfied by $1/r$, apply Newton's method to that equation, and then modify Newton's method so that it doesn't use division. Your resulting method should converge of order 2.
+
+{\color{blue}
+
+We can
+\[
+\begin{aligned}
+f(x) &= \frac{1}{r} = x \\
+&\Rightarrow 1 = xr \\
+&\Rightarrow \frac{1}{x} = r \\
+&\Rightarrow \frac{1}{x} - r = 0
+\end{aligned}
+\]
+
+\[
+f^\prime (x) = \frac{-1}{x^2}
+\]
+
+\[
+\begin{aligned}
+F(x) &= x - \frac{f(x)}{f^\prime(x)} \\
+&= x - \frac{\frac{1}{x} - r}{\frac{-1}{x^2}} \\
+&= x + \left(\frac{1}{x} - r\right) x^2 \\
+&= x(2 - xr)
+\end{aligned}
+\]
+
+}
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{clojure}
+  (defn reciprocal [r]
+    (let [convergent? (fn [{:keys [steps error] :or {steps 0
+                                                    error 1}}]
+                        (or (< (Math/abs (double error)) 0.00001)
+                            (> steps 20)))
+          next-guess (fn [{:keys [x last steps] :or {last 0
+                                                    steps 0}}]
+                       (let [guess (* x (- 2 (* x r)))]
+                         {:steps (inc steps)
+                          :error (- last guess)
+                          :last x
+                          :x guess}))
+          answer (first (drop-while #(not (convergent? %))
+                                    (iterate #(next-guess %)
+                                             {:x (if (= 20 r) 0.01 0.1)})))]
+      (println answer)
+      (:x answer)))
+
+  (reciprocal 3) => 0.33333333333333337
+  (reciprocal 4) => 0.24999999999999997
+\end{minted}
+
+{\color{blue}
+\textbf{Explanation: } We define a function that uses a few local
+functions to perform Newton's method. On line 2, we locally define the
+\texttt{convergent?} function which checks if our answer is below a
+threshold or the iteration has exceeded a maximum number of steps. On
+line 6, we define a function called \texttt{next-guess} that performs
+the actual Newton's step operation $x(2 - xr)$ and returns it's value
+with additional metadata to help with iteration. On line 13 we perform
+the calculation, starting at a suitably small value and treating our
+function \texttt{next-guess} as a sequence of iterations we take only
+the first convergent value we receive.
+}

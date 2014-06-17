@@ -1,0 +1,27 @@
+\textbf{A ``simple'' program:} Write a program that reads $n$ and the entries $x_1$, $x_2$, $\cdots$, $x_n$ of a vector $x \in \mathbb{R}^n$ from standard input and prints \[||x||_2 = \sqrt{\sum_{i=1}^n x_i^2}\] to standard output.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               framesep=2mm]{clojure}
+  (defn norm [x]
+    {:pre [(coll? x)]}
+    (->> x
+         (map #(Math/pow % 2))
+         (apply +)
+         Math/sqrt))
+
+  ;; Examples
+  (norm [1 2 3]) => 3.7416573867739413
+  (norm (range 20)) => 49.69909455915671
+  (norm [1 1 1]) => 1.7320508075688772
+  (norm [1 0 0]) => 1.0
+  (norm [3 4]) => 5.0
+\end{minted}
+
+{\color{blue}
+
+\textbf{Explanation:} We define a function that takes one argument a vector $x$, and asserts that it is a collection (in this environment any ``collection'' can be treated like a vector) on line 2. We use the thread last operator \textit{->>} to nest the evaluation of each statement through the end of the next function, similar to a composition. We start with $x$ and apply the $x_i^2$ operation to each value in the vector using a $map$ operation, we sum all the elements up, and lastly apply the $sqrt$ operation. The result of this is implicitly set as the return value of the function.
+
+}

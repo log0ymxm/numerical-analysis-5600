@@ -1,0 +1,76 @@
+\textbf{An alternative approximation problem:}
+Find a linear function $l(x)$ such that
+\[
+\int_0^1 |\mathrm{e}^x - l(x)| \text{d}x = \min.
+\]
+
+{\color{blue}
+
+\[
+\begin{aligned}
+\min &= \int_0^1 |\mathrm{e}^x - a\, x - b| \,\text{d}x \\
+&= \int_0^c \mathrm{e}^x - a\, x - b \,\text{d}x +
+\int_c^d -\mathrm{e}^x + a\, x + b \,\text{d}x +
+\int_d^1 \mathrm{e}^x - a\, x - b \,\text{d}x
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+f &= \mathrm{e}^x - a\, x - b \\
+g &= -\mathrm{e}^x + a\, x + b
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\nabla f = \left(\begin{array}{c} - x\\ -1 \end{array}\right), \,\,
+\nabla g = \left(\begin{array}{c} x\\ 1 \end{array}\right)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+ \int_0^c \nabla f \text{d}x +
+\int_c^d \nabla g \text{d}x +
+\int_d^1 \nabla f \text{d}x
+&= \left(\begin{array}{c} - \frac{c^2}{2}\\ - c \end{array}\right) +
+\left(\begin{array}{c} \frac{d^2}{2} - \frac{c^2}{2}\\ d -
+  c \end{array}\right) +
+\left(\begin{array}{c} \frac{d^2}{2} - \frac{1}{2}\\ d -
+  1 \end{array}\right) \\
+&= \left(\begin{array}{c}  - c^2 + d^2 - \frac{1}{2}\\ 2\, d - 2\, c - 1 \end{array}\right)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\Rightarrow c = \frac{1}{4},\,\, d = \frac{3}{4}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+&\Rightarrow
+\left(\begin{array}{c}
+a\, c + b = e^c \\
+a\, d + b = e^d
+\end{array}\right) \\
+&= \left(\begin{array}{c}
+\frac{a}{4} + b = \mathrm{e}^{\frac{1}{4}}\\
+\frac{3\, a}{4} + b = \mathrm{e}^{\frac{3}{4}}
+\end{array}\right)
+\end{aligned}
+\]
+
+\[
+a = 2\, \mathrm{e}^{\frac{3}{4}} - 2\, \mathrm{e}^{\frac{1}{4}},b = \frac{3\, \mathrm{e}^{\frac{1}{4}}}{2} - \frac{\mathrm{e}^{\frac{3}{4}}}{2}
+\]
+
+\[
+l(x) =
+\left(2\, \mathrm{e}^{\frac{3}{4}} - 2\, \mathrm{e}^{\frac{1}{4}}\right) x +
+\frac{3\, \mathrm{e}^{\frac{1}{4}}}{2} - \frac{\mathrm{e}^{\frac{3}{4}}}{2}
+\]
+
+}

@@ -1,0 +1,46 @@
+\textbf{Fourier Series.} Compute the Fourier series of the
+function
+\[
+f(x) = \left\{
+\begin{aligned}
+ 1 &\,\,\, \text{if}\,\, t \in (-\pi, 0) \\
+-1 &\,\,\, \text{if}\,\, t \in [0, \pi]
+\end{aligned}
+\right.
+\]
+where you assume that $f$ is $2\pi$ periodic, i.e. $f(t+2\pi) = f(t)$
+for all $t \in \mathbb{R}$. Draw the truncated Fourier series for some
+values of $n$ and comment on your plots.
+
+
+{\color{blue}
+
+\[
+\begin{aligned}
+a_n &= \frac{1}{\pi} \int_{-\pi}^{\pi} f(t) \cos(n t) \textrm{d}t \\
+&= \frac{1}{\pi} \left(\int_{-\pi}^0 \cos(nt) \textrm{d}t -
+\int_0^{\pi} \cos(nt) \textrm{d}t \right) \\
+&= \frac{1}{\pi} \left( \frac{\sin(nt)}{n} \bigg|_{-\pi}^0 -
+\frac{\sin(nt)}{n} \bigg|_0^{\pi} \right) \\
+&= 0 \\
+b_n &= \frac{1}{\pi} \int_{-\pi}^{\pi} f(t) \sin(n t) \textrm{d}t \\
+&= \frac{1}{\pi} \left(\int_{-\pi}^0 \sin(nt) \textrm{d}t -
+\int_0^{\pi} \sin(nt) \textrm{d}t \right) \\
+&= \frac{1}{\pi} \left( \frac{-\cos(nt)}{n} \bigg|_{-\pi}^0 +
+\frac{\cos(nt)}{n} \bigg|_0^{\pi} \right) \\
+&= \frac{1}{\pi} \left(
+\frac{-1 + \cos(\pi n)}{n}
++ \frac{\cos(\pi n) - 1}{n}
+ \right) \\
+&= \frac{2}{\pi n} \left(
+ \cos(\pi n) - 1
+ \right) \\
+&= \frac{2}{\pi n} \left(
+ (-1)^n - 1
+ \right) \\
+\Rightarrow F(t) &= \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos(n t) +
+b_n \sin(n t) \\
+&= \sum_{n-\textrm{odd}} \frac{-4}{\pi n} \sin(n t)
+\end{aligned}
+\]
+}

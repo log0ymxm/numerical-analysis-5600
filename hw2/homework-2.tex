@@ -1,0 +1,74 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{minted}
+\usepackage{hyperref}
+
+\usepackage{color}
+
+\usepackage{graphicx}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{microtype}
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\pe}[1]{\blue{PE: #1}}
+
+\newenvironment{polynomial}
+  {\par\vspace{\abovedisplayskip}%
+   \setlength{\leftskip}{\parindent}%
+   \setlength{\rightskip}{\leftskip}%
+   \medmuskip=4mu plus 2mu minus 2mu
+   \binoppenalty=0
+   \noindent$\displaystyle}
+  {$\par\vspace{\belowdisplayskip}}
+
+
+
+\newcommand{\ans}[1]{\blue{
+\begin{polynomial}
+#1
+\end{polynomial}
+}}
+
+
+\newcommand{\vect}[1]{\vec{\lowercase{#1}}}
+
+\title{Homework \#2}
+\author{Haylee Crane \\
+Paul English}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item \input{01-taylor-series.tex}
+\item \input{02-a-simple-program.tex}
+\item \input{03-some-iteration.tex}
+\item \input{04-newtons-method.tex}
+\item \input{05-division-without-division.tex}
+\item \input{06-a-cubically-convergent-method.tex}
+\item \input{07-polynomial-interpolation.tex}
+\item \input{08-uniqueness-of-the-interpolating-polynomial.tex}
+\item \input{09-the-infamous-runge-phenomenon.tex}
+\item \input{10-judicious-interpolation.tex}
+\item \input{11-least-squares-approximation-of-functions.tex}
+\item \input{12-an-alternative-approximation-problem.tex}
+\item \input{13-another-alternative-approximation-problem.tex}
+
+\end{enumerate}
+
+\end{document}

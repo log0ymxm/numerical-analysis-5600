@@ -1,0 +1,50 @@
+\textbf{Polynomial Interpolation:}
+Suppose you want to interpolate to the data
+$(x_i, y_i)$, $i=0,\dots,n$ by a polynomial of degree $n$. Recall that
+the interpolating polynomial $p$ can be written in its Lagrange form
+as
+\[
+p(x) = \sum_{i=0}^n y_i L_i(x)\text{    where    } L_i(x) =
+\frac{\prod_{i\ne j} (x - x_j)}{\prod_{i \ne j} (x_i - x_j)}.
+\]
+Show that
+\[\sum_{i=0}^n x_i^j L_i(x) = x^j\text{    for    } j=0,\dots,n.\]
+
+{\color{blue}
+If $y_i = x_i^j$ then we have,
+
+\[
+\begin{aligned}
+p(x) &= \sum_{i=0}^n x_i^j L_i(x) \\
+&= \sum_{i=0}^n x_i^j \frac{\prod_{i\ne j} (x - x_j)}{\prod_{i \ne j}
+  (x_i - x_j)} \\
+&= \sum_{i=0}^n x_i^j
+\frac{(x - x_0)(x - x_1)\cdots (x - x_{j-1})(x - x_{j+1}) \cdots (x - x_n)}
+{(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots (x_i - x_n)} \\
+&= \sum_{i=0}^n x_i^j
+\frac{(x - x_0)(x - x_1)\cdots (x - x_{j-1})(x - x_{j+1}) \cdots (x - x_n)}
+{(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x_i - x_n)}
+\frac{(x_i - x_j)}{(x_i - x_j)} \\
+&= \sum_{i=0}^n
+\frac{(x_i^{j+1} - x_i^j x_j)(x - x_0)(x - x_1)\cdots (x - x_{j-1})(x - x_{j+1}) \cdots (x - x_n)}
+{n (x_i - x_j)(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x_i - x_n)} \\
+&= \sum_{i=0}^n
+\frac{x^j (x_i - x_j)(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x - x_n)}
+{n (x_i - x_j)(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x_i - x_n)} \\
+&= x^j \sum_{i=0}^n
+\frac{(x_i - x_j)(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x - x_n)}
+{n (x_i - x_j)(x_i - x_0)(x_i - x_1)\cdots (x_i - x_{j-1})(x_i - x_{j+1}) \cdots
+  (x_i - x_n)} \\
+&= x^j \sum_{i=0}^n
+\frac{1} {n} \\
+&= x^j
+\end{aligned}
+\]
+
+
+}

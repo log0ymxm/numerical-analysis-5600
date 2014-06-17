@@ -1,0 +1,115 @@
+\textbf{Newton's Method:} Suppose $f$ has a root of multiplicity $p>1$ at
+$x = \alpha$, i.e. \[f(\alpha) = f^\prime(\alpha) = \dots =
+f^{(p-1)}(\alpha) = 0\text{,    }f^{(p)} (\alpha) \ne 0\]. (a) Show
+that Newton's method applied to $f(x) = 0$ converges linearly to
+$\alpha$. (b) Show that this modification of Newton's
+method: \[x_{k+1} = x_k - p \frac{f(x_k)}{f^\prime(x_k)}\] converges
+quadratically to $\alpha$. \textbf{Hint:} You probably are thinking of
+using L'H\^{o}pital, but the problem is much easier if you think of
+$f$ as being defined by $f(x) = (x-\alpha)^p F(x)$ where $F(\alpha)
+\ne 0$.
+
+{\color{blue}
+% TODO
+
+\begin{enumerate}
+
+\item
+
+We have
+\[
+g(x) = x - \frac{f(x)}{f^\prime(x)}
+\]
+
+Then
+\[
+g^\prime(x) = \frac{f(x)\, f^{\prime \prime}(x)}{{f^\prime(x)}^2}
+\]
+
+If $f(x) = (x-\alpha)^p F(x)$ then we have that
+\[
+\begin{aligned}
+f(x) &= (x - \alpha) g_0(x) \\
+f^\prime (x) &= p(x - \alpha)^{p-1} F(x) + (x - \alpha)^p F^\prime (x) \\
+&= (x - \alpha)^{p-1} g_1(x) \\
+f^{\prime \prime} (x) &= p(p - 1)(x - \alpha)^{p-2} F(x) + 2p (x - \alpha)^{p-1}
+F^\prime(x) + (x - \alpha)^p F^{\prime \prime} (x) \\
+&= (x - \alpha)^{p-2} g_2(x)
+\end{aligned}
+\]
+
+where $g_0(x)$, $g_1(x)$, and $g_2(x)$ are the successive iterations of $g(x)$.
+
+We can now plug these into the function for $g^\prime$ as it
+approaches $\alpha$
+\[
+\begin{aligned}
+\lim_{x \to \alpha} g^\prime(x) &=
+\frac{(x - \alpha) g_0(x) (x - \alpha)^{p-2} g_2(x)}
+{\left[(x - \alpha)^{p-1} g_1(x)\right]^2} \\
+&= \frac{g_0(x) g_2(x)}{g_1(x)^2} \\
+&= \frac{p(p - 1)F(\alpha)^2}{p^2 F(\alpha)^2} \\
+&= \frac{p - 1}{p} < 1
+\end{aligned}
+\]
+
+Meaning that our function will linearly converge to $\alpha$ since
+$\frac{p - 1}{p} < 1$.
+
+
+\item
+
+% part (b)
+% #19 - http://www.math.purdue.edu/~shen/ma514/HWsol/HW3.pdf
+
+We define an error term $e_n = x_n - \alpha$, and we have that
+
+We can then expand the Taylor series of $f(x_n)$ and eliminate many of
+the initial terms because $f(\alpha) = f^\prime(\alpha) = \dots = f^{(p-1)}(\alpha) = 0$
+
+\[
+\begin{aligned}
+f(x_n) &= f(\alpha + e_n) \\
+&= f(\alpha) + e_n f^\prime (\alpha) + \cdots + \frac{e_n^{(p-1)} f^{(p-1)}(\alpha)}{(p-1)!} + \frac{e_n^p f^{(p)} (\alpha)}{p!}
++ \frac{e_n^{p+1} f^{(p+1)} (\xi_n)}{(p+1)!} \\
+\Rightarrow f(x_n) &= \frac{e_n^p f^{(p)}(\alpha)}{p!} + \frac{e_n^{p+1} f^{(p+1)} (\xi_n)}{(p+1)!}
+\end{aligned}
+\]
+
+We then differntiate $f(x_n)$
+
+\[
+\begin{aligned}
+f^\prime (x_n) = \frac{e_n^{p-1} f^p (\alpha)}{(p-1)!} + \frac{e_n^p f^{(p+1)} (\eta_n)}{p!}
+\end{aligned}
+\]
+
+Now if we calculate the next error term in our sequence we can see
+that there is quadratic convergence.
+
+\[
+\begin{aligned}
+e_{n+1} &= x_{n+1} - \alpha \\
+&= x_n - \alpha - \frac{p f(x_n)}{f^\prime (x_n)}\\
+&= e_n - \frac{\left(
+\frac{e_n^p f^{(p)}(\alpha)}{(p-1)!} + \frac{e_n^{p+1} f^{(p+1)}(\xi_n)}{(p+1)(p-1)!}
+\right)}{\left(
+\frac{e_n^{p-1} f^{(p)}(\alpha)}{(p-1)!} + \frac{e_n^p f^{(p+1)}(\eta_n)}{p!}
+\right)} \\
+&= e_n^2 \frac{\left(
+\frac{f^{(p+1)}(\eta_n)}{p!} - \frac{f^{(p+1)} (\eta_n)}{(p+1)(p-1)!}
+\right)}
+{\left(
+\frac{f^{(p)}(\alpha)}{(p-1)!} +
+\frac{e_n f^{(p+1)}(\eta_n)}{p!}
+\right)}
+\end{aligned}
+\]
+
+Since the term $e_{n+1}$ has a leading coefficient $e_n^2$ we know
+that it converges quadratically.
+
+
+\end{enumerate}
+
+}

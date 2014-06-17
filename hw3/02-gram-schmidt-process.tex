@@ -1,0 +1,100 @@
+\textbf{Example for Gram Schmidt Process.} Use the Gram-Schmidt
+Process to find a basis of \[\mathrm{span}\{1, x, e^x\}\] that is orthonormal
+with respect to the inner product \[(f,g) = \int_0^1 f(x) g(x)
+\mathrm{d}x.\]
+
+{\color{blue}
+
+
+\[
+b = \text{span} \{ 1, x, e^x \}
+\]
+
+\[
+\begin{aligned}
+z_k &= b_k - \sum_{i=0}^{k-1} (b_k, q_i) q_i \\
+q_k &= \frac{z_k}{||z_k||}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+z_0 &= 1 \\
+q_0 &= \frac{b_0}{|| b_0 ||} = \frac{1}{|| 1 ||} = 1 \\
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+z_1 &= x - \int_0^1 t \text{d}t \\
+&= x - \frac{1}{2} \\
+q_1 &= \frac{x - \frac{1}{2}}{(\int_0^1 (t - \frac{1}{2})^2 \text{d}t)^{\frac{1}{2}}} \\
+&= \frac{x - \frac{1}{2}}
+{(\int_0^1 t^2 - t + \frac{1}{4} \text{d}t)^{\frac{1}{2}}} \\
+&= \frac{x - \frac{1}{2}}
+{(\frac{1}{12})^{\frac{1}{2}}} \\
+&= \frac{x - \frac{1}{2}}
+{\frac{1}{2 \sqrt{3}}} \\
+&= \sqrt{3}(2x - 1)
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+z_2 &= e^x - \int_0^1 e^t \text{d}t - \int_0^1 e^t \sqrt{3} (2t - 1)
+\text{d}t (\sqrt{e} (2x-1)) \\
+&= e^x - (e - 1) - \sqrt{3} \int_0^1 e^t 2 t - e^t \text{d}t (\sqrt{3}
+(2x-1)) \\
+&= e^x - e + 1 - (6x - 3) (2 \int_0^1 e^t t \text{d}t - (e-1)) \\
+&= e^x - e + 1 - (6x - 3) (2 (e^t t \bigg|_0^1 - \int_0^1 e^t
+\text{d}t) - (e-1)) \\
+&= e^x - e + 1 - (6x - 3) (2 e - 2 (e-1) - (e-1)) \\
+&= e^x - e + 1 - (6x - 3) (2e - 2e + 2 - e + 1) \\
+&= e^x - e + 1 - (6x - 3) (3 - e) \\
+&= e^x - e + 1 - (18x - 6ex - 9 + 3e) \\
+&= e^x - e + 1 - 18x + 6ex + 9 - 3e \\
+&= e^x - 4e - 18x + 6ex + 10 \\
+q_2 &= \frac{
+e^x - 4e - 18x + 6ex + 10
+}{
+|| e^x - 4e - 18x + 6ex + 10 ||
+}\\
+q_2 &= \frac{
+e^x - 4e - 18x + 6ex + 10
+}{
+(\int_0^1  e^x - 4e - 18x + 6ex + 10 \text{d}t)^{\frac{1}{2}}
+}\\
+q_2 &= \frac{
+e^x - 4e - 18x + 6ex + 10
+}{
+(\int_0^1
+  e^{2x} - 4 e^x e - 18 e^x x + 6 e^x e x + 10 e^x
+- 4 e^x e + 16 e^2 + 72 e x - 24 e^2 x - 40 e
+- 18 e^x x + 72 e x + 324 x^2 - 108 e x^2 - 180 x
++ 6 e^x e x - 24 e^2 x - 108 e x^2 + 36 e^2 x^2 + 60 e x
++ 10 e^x - 40 e - 180x + 60e x + 100
+\text{d}t)^{\frac{1}{2}}
+}\\
+q_2 &= \frac{
+e^x - 4e - 18x + 6ex + 10
+}{
+(\int_0^1
+e^{2x} - 360 x - 80 e + 16 e^2 + 20 e^x
++ 264 x e - 48 x e^2 - 216 x^2 e + 36 x^2 e^2
+- 8 e e^x - 36 x e^x + 324 x^2 + 12 x e e^x
++ 100
+\text{d}t)^{\frac{1}{2}}
+}\\
+q_2 &= \frac{
+e^x - 4e - 18x + 6ex + 10
+}{
+\sqrt{
+  20 e - \frac{7 e^2}{2} - \frac{57}{2}
+}
+}\\
+\end{aligned}
+\]
+
+
+
+}

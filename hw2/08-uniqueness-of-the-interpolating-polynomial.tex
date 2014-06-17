@@ -1,0 +1,140 @@
+\textbf{Uniqueness of the interpolating polynomial:} Assume you are
+given the data
+\[\begin{aligned}
+x_i\;&: \,\, 1 \,\, 2 \,\, 4 \,\, 8 \\
+y_i\;&: \,\, 1 \,\, 2 \,\, 3 \,\, 4
+\end{aligned}\] Construct the interpolating polynomial using
+
+\begin{enumerate}
+\item the power form
+\item the Lagrange form
+\item the Newton form,
+\end{enumerate}
+and show that they all yield the same polynomial.
+
+{\color{blue}
+
+\begin{enumerate}
+\item[(a) the power form]
+
+\[
+\begin{aligned}
+  p(x) &= a_0 + a_1 x + a_2 x^2 + a_3 x^3 \\
+  \Rightarrow p(x) &= V_n \vect{a} = \vect{y} \\
+p(x) &=
+\left(\begin{array}{cccc}
+  1 & x_0 & x_0^2 & x_0^3 \\
+  1 & x_1 & x_1^2 & x_1^3 \\
+  1 & x_2 & x_2^2 & x_2^3 \\
+  1 & x_3 & x_3^2 & x_3^3
+\end{array}\right)
+\left(\begin{array}{c}
+  a_0 \\
+  a_1 \\
+  a_2 \\
+  a_3
+\end{array}\right)
+= \left(\begin{array}{c}
+  y_0 \\
+  y_1 \\
+  y_2 \\
+  y_3
+\end{array}\right) \\
+p(x) &= \left(\begin{array}{cccc}
+  1 & 1 & 1 & 1 \\
+  1 & 2 & 4 & 8 \\
+  1 & 4 & 16 & 64 \\
+  1 & 8 & 64 & 512
+\end{array}\right)
+\left(\begin{array}{c}
+  a_0 \\
+  a_1 \\
+  a_2 \\
+  a_3
+\end{array}\right)
+= \left(\begin{array}{c}
+  1 \\
+  2 \\
+  3 \\
+  4
+\end{array}\right) \\
+p(x) &= \left(\begin{array}{cccc}
+  1 & 1 & 1 & 1 \\
+  1 & 2 & 4 & 8 \\
+  1 & 4 & 16 & 64 \\
+  1 & 8 & 64 & 512
+\end{array}\right)
+\left(\begin{array}{c}
+  - \frac{10}{21}\\
+  \frac{7}{4}\\
+  - \frac{7}{24}\\
+  \frac{1}{56}
+\end{array}\right)
+= \left(\begin{array}{c}
+  1 \\
+  2 \\
+  3 \\
+  4
+\end{array}\right) \\
+p(x) &= \frac{1}{56} x^3 - \frac{7}{24} x^2 + \frac{7}{4} x - \frac{10}{21}
+\end{aligned}
+\]
+
+\item[(b) the Lagrange form]
+
+\[
+L(x) = \frac{\prod_{i \ne j} (x - x_j)}{\prod_{i \ne j} (x_i - x_j)}
+\]
+
+\[
+\begin{aligned}
+  p(x) &= \sum_{i=0}^n y_i L(x) \\
+  p(x) &= 1 \frac{(x-2)(x-4)(x-8)}{(1-2)(1-4)(1-8)} + 2 \frac{(x-1)(x-4)(x-8)}{(2-1)(2-4)(2-8)} \\
+  &    + 3 \frac{(x-1)(x-2)(x-8)}{(4-1)(4-2)(4-8)} + 4 \frac{(x-1)(x-2)(x-4)}{(8-1)(8-2)(8-4)}\\
+  p(x) &= \frac{x^3 - 14\, x^2 + 56\, x - 64}{-21} + \frac{x^3 - 13\, x^2 + 44\, x - 32}{12} \\
+&    + \frac{x^3 - 11\, x^2 + 26\, x - 16}{-24} + \frac{x^3 - 7\, x^2 + 14\, x - 8}{168} \\
+p(x) &= \frac{1}{56} x^3 - \frac{7}{24} x^2 + \frac{7}{4} x - \frac{10}{21}
+\end{aligned}
+\]
+
+\item[(c) the Newton form]
+
+\[
+\begin{aligned}
+p_k(x) &= \sum_{i=0}^k c_i \prod_{j=0}^{i-1} (x - x_j) \\
+\Rightarrow p_0(x) &= c_0 \\
+p_1(x) &= p_0(x) + c_1(x -x_0) \\
+p_2(x) &= p_1(x) + c_2(x -x_0)(x - x_1) \\
+p_3(x) &= p_2(x) + c_3(x -x_0)(x - x_1)(x - x_2) \\
+\Rightarrow p_0(x) &= y_0 \\
+p_1(x) &= p_0(x) + \frac{y_1 - P_0(x_1)}{(x_1 - x_0)} (x -x_0) \\
+p_2(x) &= p_1(x) + \frac{y_2 - P_1(x_2)}{(x_2 - x_0)(x_2 - x_1)} (x -x_0)(x - x_1) \\
+p_3(x) &= p_2(x) + \frac{y_3 - P_2(x_3)}{(x_3 - x_0)(x_3 - x_1)(x_3 - x_2)} (x -x_0)(x - x_1)(x - x_2) \\
+\Rightarrow p_0(x) &= 1 \\
+p_1(x) &= p_0(x) + \frac{2 - P_0(2)}{(2 - 1)} (x -1) \\
+p_2(x) &= p_1(x) + \frac{3 - P_1(4)}{(4 - 1)(4 - 2)} (x -1)(x - 2) \\
+p_3(x) &= p_2(x) + \frac{4 - P_2(8)}{(8 - 1)(8 - 2)(8 - 4)} (x -1)(x - 2)(x - 4) \\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\Rightarrow p_0(x) &= 1 \\
+p_1(x) &= 1 + \frac{2 - 1}{(2 - 1)} (x -1) \\
+&= 1 + \frac{1}{1} (x - 1) \\
+&= x \\
+p_2(x) &= x + \frac{3 - 4}{(4 - 1)(4 - 2)} (x -1)(x - 2) \\
+&= x - \frac{1}{6} (x - 1) (x - 2) \\
+&= x - \frac{x^2 - 3x + 2}{6} \\
+&= - \frac{x^2}{6} + \frac{3\, x}{2} - \frac{1}{3} \\
+p_3(x) &= - \frac{x^2}{6} + \frac{3\, x}{2} - \frac{1}{3} + \frac{4 - 1}{(8 - 1)(8 - 2)(8 - 4)} (x -1)(x - 2)(x - 4) \\
+&= - \frac{x^2}{6} + \frac{3\, x}{2} - \frac{1}{3} + \frac{3}{168} (x -1)(x-2)(x-4) \\
+&= - \frac{x^2}{6} + \frac{3\, x}{2} - \frac{1}{3} + \frac{3}{168} \left(x^3 - 7\, x^2 + 14\, x - 8\right) \\
+&= - \frac{x^2}{6} + \frac{3\, x}{2} - \frac{1}{3} + \frac{3\, x^3 - 21\, x^2 + 42\, x - 24}{168} \\
+&= \frac{1}{56} x^3 - \frac{7}{24} x^2 + \frac{7}{4} x - \frac{10}{21} \\
+\Rightarrow P(x) &= \frac{1}{56} x^3 - \frac{7}{24} x^2 + \frac{7}{4} x - \frac{10}{21}
+\end{aligned}
+\]
+
+\end{enumerate}
+
+}

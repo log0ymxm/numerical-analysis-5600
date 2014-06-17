@@ -1,0 +1,20 @@
+\textbf{Spline versus Cubic Hermite Interpolation.} Let the function
+$s(x)$ be defined by
+\[
+s(x) = \left\{
+\begin{aligned}
+(\gamma - 1)(x^3 - x^2) + x + 1 &\,\,\,\, \text{if}\,\, x\in [0,1] \\
+\gamma x^3 - 5 \gamma x^2 + 8 \gamma x - 4 \gamma + 2 &\,\,\,\, \text{if}\,\, x\in [1,2]
+\end{aligned}
+\right.
+\]
+
+\begin{enumerate}
+\item Show that $s$ is piecewise cubic Hermite interpolant to the
+  data:
+\[
+s(0)=1, \;\;\; s(1)=s(2)=2, \;\;\; s^\prime(0)=1, \;\;\; s^\prime(1) =
+\gamma, \;\;\; s^\prime(2)=0
+\]
+\item For what value of $\gamma$ does $s$ become a cubic spline?
+\end{enumerate}

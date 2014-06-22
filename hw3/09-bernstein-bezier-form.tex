@@ -4,29 +4,35 @@ written uniquely in Bernstein-B\'ezier form.
 
 {\color{blue}
 
-Univariate polynomial
-\[
-\begin{aligned}
-P_0 (x) &= a_0 \\
-P_1 (x) &= a_1 x + a_0 \\
-P_2 (x) &= a_2 x^2 + a_1 x + a_0 \\
-P_d (x) &= a_d x^d + a_{d-1} x^{d-1} + P_{d-2} \\
-\end{aligned}
-\]
+For any univariate polynomial the interpolated polynomial for the
+Bernstein B\'ezier form will be the unique polynomial of degree $d$,
+and it will interpolate to the univariate polynomial.
+
+% TODO something still feels fishy about this one...
+
+%% Univariate polynomial
+%% \[
+%% \begin{aligned}
+%% P_0 (x) &= a_0 \\
+%% P_1 (x) &= a_1 x + a_0 \\
+%% P_2 (x) &= a_2 x^2 + a_1 x + a_0 \\
+%% P_d (x) &= a_d x^d + a_{d-1} x^{d-1} + P_{d-2} \\
+%% \end{aligned}
+%% \]
 
 
-B-form
-\[
-\begin{aligned}
-p(P) = \sum_{i+j=d} \frac{d!}{i!j!} c_{ij} b_1^i b_2^j
-\end{aligned}
-\]
+%% B-form
+%% \[
+%% \begin{aligned}
+%% p(P) = \sum_{i+j=d} \frac{d!}{i!j!} c_{ij} b_1^i b_2^j
+%% \end{aligned}
+%% \]
 
-Domain points
-\[
-\begin{aligned}
-P_{ij} = \frac{i V_1 = j V_2}{d}
-\end{aligned}
-\]
+%% Domain points
+%% \[
+%% \begin{aligned}
+%% P_{ij} = \frac{i V_1 = j V_2}{d}
+%% \end{aligned}
+%% \]
 
 }

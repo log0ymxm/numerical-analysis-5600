@@ -15,4 +15,43 @@ is orthogonal with respect to (3). Note that the proof of this fact
 uses the property \[(xf, g) = (f, xg)\] of (3).
 
 {\color{blue}
+
+Proof by induction
+\[
+\begin{aligned}
+(Q_0, Q_1) &= (1, x - \frac{(x, 1)}{(1,1)}) \\
+           &= (1,x) - (1, \frac{(x,1)}{(1,1)}) \\
+           &= (1,x) - (1,1) \frac{(x,1)}{(1,1)} \\
+           &= (1,x) - (1,x) = 0.
+\end{aligned}
+\]
+
+Assume that $Q_0, Q_1, \dots, Q_{n-1}$ are all orthogonal to each
+other, and that $k<n$. Then,
+
+\[
+\begin{aligned}
+(Q_n, Q_k) &= \left( \left( x - \frac{(x Q_{n-1}, Q_{n-1})}{(Q_{n-1},
+Q_{n-1})} \right) Q_{n-1} - \frac{(x Q_{n-1}, Q_{n-2})}{(Q_{n-2},
+Q_{n-2})} Q_{n-2}, Q_k \right) \\
+&= (x Q_{n-1}, Q_k) - \frac{(x Q_{n-1}, Q_{n-1})}{(Q_{n-1}, Q_{n-1})}
+(Q_{n-1}, Q_k) - \frac{(x Q_{n-1}, Q_{n-2})}{(Q_{n-2}, Q_{n-2})}
+(Q_{n-2}, Q_k)
+\end{aligned}
+\]
+
+Here we have three cases: $k = n-1$, $k = n-2$, $k < n-2$. Checking
+each of these,
+
+\[
+\begin{aligned}
+k = n-1: &= (x Q_{n-1}, Q_{n-1}) - (x Q_{n-1}, Q_{n-1}) = 0 \\
+k = n-2: &= (x Q_{n-1}, Q_{n-2}) - (x Q_{n-1}, Q_{n-2}) = 0 \\
+k < n-2: &= (x Q_{n-1}, Q_k) \\
+&= (Q_{n-1}, x Q_k) \\
+&= \left(Q_{n-1}, \sum_{i=0}^{n-2} \alpha_i Q_i\right)
+= \sum_{i=0}^{n-2} \alpha_i (Q_{n-1}, Q_i) = 0
+\end{aligned}
+\]
+
 }

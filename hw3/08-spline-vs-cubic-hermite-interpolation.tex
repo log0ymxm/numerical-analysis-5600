@@ -47,7 +47,13 @@ s^\prime(2) &= 0 \\
 
 \item
 
-% TODO we think this could just be any value for \gamma
+% TODO the basic difference between the two is that a piece-wise cubic
+% Hermite is C^1 at the x_i and interpolates the function values and
+% it's derivatives at the points while a cubic spline is C^2 at the
+% x_i without interpolating the function's derivatives at the points.
+% So we only need to choose a gamma s.t. the interpolation is C^2 at
+% 1. Also, we may need to make sure the spline's second derivative is
+% 0 at both the endpoints to satisfy the 'natural' spline conditions.c4
 
 
 \end{enumerate}

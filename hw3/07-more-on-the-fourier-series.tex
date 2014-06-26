@@ -5,22 +5,35 @@ series to be. Perhaps you can find it without doing any integrals!
 
 {\color{blue}
 
+\begin{align*}
+f(t) &= \cos(t+1) \\
+     &= \cos(t) \cos(1) - \sin(t) \sin(1) \\
+\end{align*}
+
+Here the trigonometric identity of $\cos(x+y) = \cos(x)\cos(y)
+- \sin(x)\sin(y)$ gives us a form equivalent to the Fourier series.
+
+Solving for $a_n$ and $b_n$ we would find that
 \[
+a_n = \left\{
 \begin{aligned}
-f(n) &= \cos(n+1) \\
-     &= \cos(1) \cos(n) - \sin(1) \sin(n) \\
-a_{0} &=\frac{1}{2\pi}\int_{-\pi}^{\pi}\cos(x+1)dx\\
-	&=\frac{\sin(1)\sin(n\pi))}{\pi(n^2-1)}\\
-	&=0\\
-a_{n} &=\frac{1}{\pi}\int_{-\pi}^{\pi}\cos(x+1)\cos(nx)dx\\
-	&=\frac{2\sin(1)\sin(n\pi))}{\pi(n^2-1)}\\
-	&=0\\
-b_{n} &=\frac{1}{\pi}\int_{-\pi}^{\pi}\cos(x+1)\sin(nx)dx\\
-	&=\frac{-2n\cos(1)\sin(n\pi))}{\pi(n^2-1)}\\
-	&=0\\
-F(n) &=
- % TODO
+\cos(1) &\,\,\, \text{if}\,\, n = 1 \\
+0 &\,\,\, \text{if}\,\, n \ne 1
 \end{aligned}
+\right.
+\]
+and
+\[
+b_n = \left\{
+\begin{aligned}
+-\sin(1) &\,\,\, \text{if}\,\, n = 1 \\
+0 &\,\,\, \text{if}\,\, n \ne 1
+\end{aligned}
+\right.
 \]
 
+Thus the Fourier series for $f(t)$ is
+\[
+F(t) = \cos(1)\cos(t) - \sin(1)\sin(t)
+\]
 }

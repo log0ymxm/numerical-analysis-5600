@@ -8,31 +8,24 @@ For any univariate polynomial the interpolated polynomial for the
 Bernstein B\'ezier form will be the unique polynomial of degree $d$,
 and it will interpolate to the univariate polynomial.
 
-% TODO something still feels fishy about this one...
+{\color{blue}
 
-%% Univariate polynomial
-%% \[
-%% \begin{aligned}
-%% P_0 (x) &= a_0 \\
-%% P_1 (x) &= a_1 x + a_0 \\
-%% P_2 (x) &= a_2 x^2 + a_1 x + a_0 \\
-%% P_d (x) &= a_d x^d + a_{d-1} x^{d-1} + P_{d-2} \\
-%% \end{aligned}
-%% \]
+For single variable let $b_1 = t$ and $b_2 = 1 - t$ (this is
+equivalent to the B-Form on the interval $[0,1]$, and can be converted
+to any other interval which will add more constants to equations, but
+they will not have an effect on the final result, so we are keeping
+them out of the way) then,
 
+\begin{align*}
+\sum_{i=0}^d {d \choose i} c_{i,d-i} t^i (1-t)^{d-i}
+&= \sum_{i=0}^d {d \choose i} c_{i,d-i} t^i \sum_{k=0}^{d-i} (-1)^k {d-i \choose k} t^k \\
+&= \sum_{i=0}^d c_{i,d-i} \sum_{k=0}^{d-i} (-1)^k {d \choose i} {d-i \choose k} t^{k+i} \\
+&= \sum_{i=0}^d c_{i,d-i} \sum_{k=i}^d (-1)^{k-i} {d \choose i} {d-i \choose k-i} t^k \\
+&= \sum_{i=0}^d \sum_{k=i}^d c_{i,d-i} (-1)^{k-i} {d \choose i} {d \choose k} t^k \\
+\end{align*}
 
-%% B-form
-%% \[
-%% \begin{aligned}
-%% p(P) = \sum_{i+j=d} \frac{d!}{i!j!} c_{ij} b_1^i b_2^j
-%% \end{aligned}
-%% \]
+which is a power form.
 
-%% Domain points
-%% \[
-%% \begin{aligned}
-%% P_{ij} = \frac{i V_1 = j V_2}{d}
-%% \end{aligned}
-%% \]
+}
 
 }

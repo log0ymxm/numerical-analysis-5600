@@ -5,3 +5,24 @@ n\] such that \[x_{-i} = -x_i, \;\;\; \text{and} \;\; y_{-i} = -y_i
 What is the required degree of the interpolating polynomial $p$? Show
 that the interpolating polynomial is odd, i.e. \[p(x) = -p(-x)\] for
 all real numbers $x$.
+
+{\color{blue}
+
+Since we have a symmetric dataset the number of points is even and
+equals $2n$. Thus the interpolated polynomial will be of degree $2n -
+1$ which is odd.
+
+Interpolating symmetric data will give us an odd polynomial $p_n(x_i) =
+y_i$ which passes through all points in our data set $x_i$, and $y_i$.
+
+This means that we have
+\begin{align*}
+p_n(-x_i) &= p_n(x_{-i}) \\
+          &= y_{-i} \\
+          &= -y_i \\
+          &= - p_n(x_i) \\
+\Rightarrow p(x) &= -p(x) \,\,\, \text{for all } i = 0,1,2,\dots,n
+\end{align*}
+
+
+}

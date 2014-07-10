@@ -1,0 +1,224 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{minted}
+\usepackage{hyperref}
+
+\usepackage{color}
+
+\usepackage{graphicx}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{microtype}
+
+\allowdisplaybreaks
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\pe}[1]{\green{PE: #1}}
+
+\newenvironment{polynomial}
+  {\par\vspace{\abovedisplayskip}%
+   \setlength{\leftskip}{\parindent}%
+   \setlength{\rightskip}{\leftskip}%
+   \medmuskip=4mu plus 2mu minus 2mu
+   \binoppenalty=0
+   \noindent$\displaystyle}
+  {$\par\vspace{\belowdisplayskip}}
+
+\newcommand{\ans}[1]{\blue{
+\begin{polynomial}
+#1
+\end{polynomial}
+}}
+
+\newcommand{\vect}[1]{\vec{\lowercase{#1}}}
+
+\title{Term Project Report}
+\author{Paul English}
+
+\begin{document}
+\maketitle
+
+% The report should be suitable for distribution among your class mates. Describe your
+% mathematical approach, your software, how to compile and use it, the lessons you
+% learned in this project, and anything else you may Þnd worth mentioning
+
+\section{Mathematical Approach}
+
+For solving the systems in the satellite and receiver programs I made use of Newton's method. It's straightforward to understand and made for a simple implementation. In working out the mathematical models of the program beforehand it greatly simplified implementation. It served as a solid specification and resource for knowing how to code the project, and how to ensure validity. For any numerical project, there is no doubt that it is essential to first understand the math and then the implementation will be trivial.
+
+\section{Software}
+
+I made use of Clojure to implement the program, which is a functional lisp built to run on the JVM (Java Virtual Machine). It compiles to Java bytecode offering you platform benefits of the JVM without having to deal with the simple object-oriented requirements and limited features of the Java language. A lisp is a programming language with polish notation and lots of bananas ``(() (()))'' for structure. Lisp computation is based on lambda calculus, requiring only a few concepts (primarily function composition) to create turing complete programs.
+
+\subsection{Functional Programming}
+
+Clojure specifically has a few paradigms that made it very nice to use for this project. 
+It has a functional programming style that is built around composition and abstraction. It's more preferable (as a human) to deal with small composable functions than it is to deal with low-level loops and machine details. 
+
+Particularly lazy evaluation and the sequence abstractions made for a very clean solver implementation. In Clojure we treat everything as a sequence of values. One example of this is in my solver implementation where we take a function that produces a guess, create an infinite iteration of successive guesses, and take only the first convergent guess.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{clojure}
+  (defn solve [start]
+    (-> start
+        (iterate next-guess)
+        (drop-while (comp not convergent?))
+        first))
+\end{minted}
+
+This is not possible in a language without lazy evaluation, and ends up being very succinct do to comprehensive sequence abstractions.
+
+\subsection{Linear Algebra Routines}
+
+Additionally the ability to overload operators means we can operate on matrices similar to how you might in matlab. The following functions all operate on matrices using a library that overloads linear operations with links to the native or GPU BLAS libraries depending on what's available.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{clojure}
+(sm/defn rotate-coordinates :- CartesianCoordinateList
+  [times :- [BigDecimal]
+   coordinates :- CartesianCoordinateList]
+  (let [theta (with-precision 20 (/ (* @tau times) @s))
+        rotations (emap rotation-matrix theta)
+        rotated (map #(mmul %1 %2)
+                     rotations
+                     coordinates)]
+    (parse-cartesian-list rotated)))
+
+(sm/defn above-horizon? :- Boolean
+  [vehicle :- CartesianCoordinate
+   satellite :- CartesianSatelliteCoordinate]
+  (> (dot (drop 2 satellite) vehicle)
+     (dot vehicle vehicle)))
+
+(defn satellite-time [{:keys [pseudorange vehicle-coordinates new-coordinates]}]
+  (- (map #(distance vehicle-coordinates %) new-coordinates)
+     (** pseudorange 2)))
+\end{minted}
+
+Wherever possible I made use of linear operations rather than explicit loops.
+
+\subsection{Testing}
+
+Responsive testing is probably one of the more important practices to keep up. This is also a point where functional and immutable languages benefit, tests are able to deal with side-effect free small functions without having to worry about any global state or values that might change under the scenes. Throughout development I wrote a lot of tests and kept them automatically running so that I would know if I inadvertently broke something while I was changing code.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=4,
+               frame=lines,
+               framesep=2mm]{clojure}
+    (fact "We can group the receiver input by the number of path points we have"
+      (let [grouped-satellites (group-by-index-change input)]
+        (count grouped-satellites) => 2
+        (->> grouped-satellites
+             first
+             (map first)) => [3 4 8 11 14 15 17 20]
+        (->> grouped-satellites
+             second
+             (map first)) => [3 4 8 11 14 15 17 20]))
+\end{minted}
+
+\subsection{Version Control}
+
+All software (and collaborative) projects should use version control. It keeps track of history, lets teams collaborate without stepping on toes, and ensures things don't get deleted. With just about anything that requires a lot of iterative work or work from multiple people this is a lifesaver. 
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=4,
+               frame=lines,
+               framesep=2mm]{sh}
+* f4c5673 (HEAD, master) Update tests
+* 687500f Use threading on solver
+* fe00fbf Remove fudge factor on above-horizon? fn
+* e9d07b6 Move squared-norm fn
+* c65270e Refactor receiver fns for clarity
+* 69dfbdf (origin/master) Add note on test checker
+* 03b224a Test all the things.
+* 4d463e1 FIX the implementation of matrix->stdout
+\end{minted}
+
+There are many other aspects of the software that made implementation straightforward \& reviewing the code is recommended.
+
+\section{Building \& Running}
+
+Obtaining the code for the project is easiest with the version control tool git. You can obtain a copy of the project by running
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{bash}
+git clone http://github.com/log0ymxm/gps-sim.git
+\end{minted}
+
+Which will create a local folder \texttt{gps-sim} in your current working directory.
+
+Clojure is a language built on the JVM and any Clojure code can be run using the java command with a the right classpath, but Java classpaths can quickly become unwieldly and it's often preferable using it directly. It's common to use the Leiningen tool to manage Clojure projects easily. The following \texttt{lein} commands let you work with the project.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{bash}
+# Build jar files for use with any java install
+lein with-profile vehicle:satellite:receiver uberjar
+cat bm.dat | java -jar target/vehicle.jar # etc..
+
+# Run tests
+lein midje
+
+# Interact with the code & environment
+lein repl
+\end{minted}
+
+We can also test and run the code from within an interactive read-eval-print-loop after running \texttt{lein repl}.
+
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{clojure}
+user> (require '[gps-sim.receiver :as receiver])
+nil
+user> (with-in-str (slurp "vehicle.out") (receiver/-main))
+;; Receiver output...
+:ok
+user> (go)
+;; This is an alternate way to start the tests, which
+;; will retest if you change the code.
+\end{minted}
+
+Making use of the repl offers the most feedback during implementation of the model. Functions can be individually tested, built, and reevaluated from disk without having to stop and start the running JVM instance.
+
+\section{Review}
+
+Overall getting an early start on the project let me play around with a few different ways of implementing this project. A functional and immutable language may not be the most efficient way to implement a simple numerical project such as this one, but the clarity and conciseness of the code is more favorable for development and understanding.
+
+If I were to continue working on this project I may try different ways of simplifying the code. The use of Java's BigDecimal numerical type offers arbitrary-precision to avoid any arithmetic errors, but runs less efficiently and makes the code a bit more complex. The systems we're solving in this project don't require the need for arbitrary-precision, and a double or float type would work fine. Additionally it would be nice to simplify the code by making use of an automatic or symbolic differentiation library. These methods of differentiation don't have accuracy issues, and can help prevent bugs in gradient or Jacobian functions while greatly reducing the amount of code that needs to be written. Though it's important to verify and analytically calculate these functions, we need not implement them if the computer is able to do so automatically.
+
+\end{document}

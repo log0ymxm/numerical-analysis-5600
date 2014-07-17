@@ -1,0 +1,59 @@
+\textbf{(Iterative Solution of Linear Systems.)} Consider the $n \times n$
+linear system $Ax=b$ and recall the three iterative techniques we
+discussed in class:
+
+\textbf{Gauss-Jacobi:}
+\[
+x_i^{[k+1]} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1}^{i-1} a_{ij}
+x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k]} \right)
+\]
+
+\textbf{Gauss-Seidel:}
+\[
+x_i^{[k+1]} = \frac{1}{a_{ii}} \left(
+b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]}
+\right)
+\]
+
+\textbf{Successive Overrelaxation:}
+\[
+x_i^{[k+1]} =
+(1 - w)x_i^{[k]} + \frac{w}{a_{ii}}
+\left(
+b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]}
+\right)
+\]
+
+As we discussed in class, think of $A$ as being split as
+\[
+A = L + D + U
+\]
+where $L$ contains the entries of $A$ below the diagonal, $U$ contains
+the entries above the diagonal, and $D$ contains the entries on the
+diagonal. For example,
+\[
+A
+= \left[\begin{matrix} 1 & 2 \\ 3 & 4 \end{matrix} \right]
+= L + D + U
+= \left[\begin{matrix} 0 & 0 \\ 3 & 0 \end{matrix} \right]
+= \left[\begin{matrix} 1 & 0 \\ 0 & 4 \end{matrix} \right]
+= \left[\begin{matrix} 0 & 2 \\ 0 & 0 \end{matrix} \right]
+\]
+
+Write the above three iterations as
+\[
+x^{[k+1]} = T_x^{[k]} + c
+\]
+and for each of the three methods give $T$ in terms of $L$, $D$, and
+$U$, and $c$ in terms of $L$, $D$, $U$ and $b$.
+
+Note: in class we derived the correct expressions for the Gauss-Jacobi
+method. There was a mistake in the in-class discussion of the
+Gauss-Seidel method, and I left the SOR method as an exercise.
+
+{\color{blue}
+
+\textbf{Gauss-Jacobi:}
+\textbf{Gauss-Seidel:}
+\textbf{Successive Overrelaxation:}
+}

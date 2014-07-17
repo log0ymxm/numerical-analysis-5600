@@ -1,0 +1,71 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[11pt, oneside]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{minted}
+\usepackage{hyperref}
+
+\usepackage{color}
+
+\usepackage{graphicx}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{microtype}
+
+\allowdisplaybreaks
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\pe}[1]{\green{PE: #1}}
+
+\newenvironment{polynomial}
+  {\par\vspace{\abovedisplayskip}%
+   \setlength{\leftskip}{\parindent}%
+   \setlength{\rightskip}{\leftskip}%
+   \medmuskip=4mu plus 2mu minus 2mu
+   \binoppenalty=0
+   \noindent$\displaystyle}
+  {$\par\vspace{\belowdisplayskip}}
+
+
+
+\newcommand{\ans}[1]{\blue{
+\begin{polynomial}
+#1
+\end{polynomial}
+}}
+
+
+\newcommand{\vect}[1]{\vec{\lowercase{#1}}}
+
+\title{Homework \#4}
+\author{
+%Haylee Crane \\
+Paul English \\
+%Arthur Stefanishin
+}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item \input{01-iterative-solution-of-linear-systems.tex}
+\item \input{02-positive-definite-matrices.tex}
+\item \input{03-the-ul-factorization.tex}
+\item \input{04-spectral-radius.tex}
+\item \input{05-inequalities-are-sharp.tex}
+
+\end{enumerate}
+
+\end{document}

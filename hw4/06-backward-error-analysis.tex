@@ -7,6 +7,19 @@ $A$ that causes an error $e$ in the solution $x$. Show that \[
 \]
 
 {\color{blue}
+\begin{aligned}
 
+Ax&=b\\
+Ae&=r, e=A^{-1}\\
+(A-E)(x-e)&=b\\
+\Rightarrow A(x-e)-E(x-e)&=b\\
+\Rightarrow Ax-Ae-b&=E(x-e)\\
+\Rightarrow -r&=E(x-e)\\
+\left \| e \right \|&\leqslant \left \| A^{-1} \right \|\left \| r \right \|\\
+\left \| r \right \|&\leqslant \left \| E \right \|\left \| (x-e) \right \|\\
+\Rightarrow \frac{\left \| e \right \|}{\left \| E \right \|\left \| (x-e) \right \|}&\leqslant \frac{\left \| A^{-1} \right \|\left \| r \right \|}{\left \| r \right \|}\\
+\Rightarrow \frac{\left \|e  \right \|}{\left \| (x-e) \right \|} &\leqslant\left \| A^{-1} \right \|\left \| E \right \|=\left \| A \right \|\left \| A^{-1} \right \|\frac{\left \| E \right \|}{\left \| A \right \|}\\
+\Rightarrow \frac{\left \|e  \right \|}{\left \| (x-e) \right \|} &\leqslant \left \| A \right \|\left \| A^{-1} \right \| \frac{\left \| E \right \|}{\left \| A \right \|}
 
+\end{aligned}
 }

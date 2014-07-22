@@ -1,5 +1,5 @@
 \textbf{(Spectral Radius.)} We saw that the spectral radius of a
-(square) matrix $A$ never exceeds an induced matrix norm of $||A||$.
+(square) matrix $A$ never exceeds an induced matrix norm of $\|A\|$.
 It can be shown that for any particular matrix $A$ one can find a
 vector norm such that the induced matrix norm of $A$ is arbitrarily
 close to the spectral radius of $A$. Does the spectral radius itself
@@ -8,24 +8,26 @@ define a norm? Why, or why not?
 
 
 {\color{blue}
-\begin{align}
-Consider\,  0&=\begin{pmatrix}
-0 & 0\\ 
+\begin{align*}
+\text{Consider } 0 &=\begin{pmatrix}
+0 & 0\\
 0 & 0
-\end{pmatrix}
-and\, A=
+\end{pmatrix} \\
+\text{and } A &=
 \begin{pmatrix}
-0 & 0\\ 
+0 & 1\\
 0 & 0
 \end{pmatrix}\\
-\end{align}
+\end{align*}
 
-Clearly, A$\neq0\\$
-The eigenvalues of 0 and A are$ \{0,0\}\\$
-$\Rightarrow \rho(A)=\rho(0)=max \{0,0\}\\$
-By definition, a norm requires the property\\
-$||A|| =0 \to A=0$\\
-Here, we have $\rho(A)=0, but A\neq 0$\\
-Therefore, $\rho$ is \underline{not} a matrix norm.
+Clearly, $A \neq 0$, the eigenvalues of the zero matrix $0$ and $A$ are $0$ and $0$
+respectively.
+\begin{align*}
+\Rightarrow \rho(A) &= \rho(0) \\
+&= \max \{0,0\}
+\end{align*}
+By definition, a norm requires the property $\|A\| = 0 \Rightarrow A = 0$
+Here, we have $\rho(A)=0$, but $A \neq 0$
+Therefore, $\rho$ is \textit{not} a matrix norm.
 
 }

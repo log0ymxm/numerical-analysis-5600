@@ -1,11 +1,11 @@
 \textbf{(Numerical Comparison.)} For Euler's Method, the Trapezoidal
 Rule, Simpson's Rule, and the standard $4$-th order Runge-Kutta
 Method solve the initial value problem
-\begin{aligned}
+\begin{align}
 y^\prime &= y \\
 y(0) = 1\\
 x \in [0,1]
-\end{aligned}
+\end{align}
 with step-sizes $h = 2^{-s}$ where $s = 3,4,\dots,15$. Plot the error
 at the right end-point, i.e. $y(1) - y_n$ (where $n = 1/h$), against
 $h$. You may wish to superimpose the plots. If you like use
@@ -18,30 +18,34 @@ The ``standard'' Runge-Kutta method is:
 y_{n+1} = y_n + \frac{h}{6} (K_1 + 2K_2 + 2K_3 + K_4)
 \]
 where
-\begin{aligned}
+\begin{align}
 K_1 &= f(x_n, y_n) \\
 K_2 &= f \left(x_n + \frac{h}{2}, y_n + \frac{h}{2} K_1 \right)
 K_3 &= f \left(x_n + \frac{h}{2}, y_n + \frac{h}{2} K_2 \right)
 K_4 &= f \left(x_n + h, y_n + h K_3 \right)
-\end{aligned}
+\end{align}
 
 {\color{blue}
 
 \begin{enumerate}
 \item \textbf{Euler's Method}
-\begin{aligned}
+\begin{align}
   y_{n+1} - y_n = h f_n
-\end{aligned}
+\end{align}
 
 \item \textbf{Trapezoidal Rule}
-\begin{aligned}
+\begin{align}
   y_{n+1}- y_n = \frac{h}{2} (f_{n+1} + f_n)
-\end{aligned}
+\end{align}
 
 \item \textbf{Simpons's Rule}
-\begin{aligned}
+\begin{align}
  _{n+1} - y_n
   y_{n+1}- y_n = \frac{h}{2} (f_{n+1} + f_n)
-\end{aligned}Successive Overrelaxation:
+\end{align}
+
+\item \textbf{Successive Overrelaxation:}
+
+\end{enumerate}
 
 }

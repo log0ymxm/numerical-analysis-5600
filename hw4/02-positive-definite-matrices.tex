@@ -24,7 +24,29 @@ positive definite.
 
 {\color{blue}
 
-% http://www.hss.caltech.edu/~kcb/Notes/QuadraticForms.pdf
-% page 4
+For any positive definite matrix we can rearrange a column and a row
+in the same way and preserve the properties positive definiteness and
+symmetry. So without loss of generality we can consider just the
+leading principal submatrices, rather than all possible permutations,
+i.e. We can just look at $A_{\{1\}}, A_{\{1,2\}}, A_{\{1,2,\dots\}}, \dots$.
+
+By induction, for the case $n=1$ our the only principal submatrix
+$A_{\{1\}}$ is the same as $A$ and is trivial. For $n=2$ the only
+principal submatrix will be $A_{\{1\}}$, and since $A_{\{1\}}$ is a
+one dimension diagonal matrix we know that it's eigenvalue is the
+element itself, which is positive, since the diagonals of $A$ are
+positive, thus for $n=2$ this is still true.
+
+Now assuming we have a positive definite matrix $A$ of size $n \times n$
+and that all principle submatrices $A_{\{1\}}, A_{\{1,2\}}, \dots, A_{\{1,2,\dots,n-2\}}$ have been
+proven to be positive definite, we have to show that
+$A_{\{1,\dots,n-2\}}$ is also positive definite.
+
+We know that the eigenvalues of $A_{\{1\}}, A_{\{1,2\}}, \dots, A_{\{1,2,\dots,n-2\}}$
+are all positive, if we assume that the matrix $A_{\{1,2,\dots,n-1\}}$
+is not positive definite, then it must have a non-positive eigenvalue.
+However if this were the case then the matrix $A$ would also have to
+contain a non-positive eigenvalue and we would have a contradiction.
+Therefore $A_{\{1,2,\dots,n-1\}}$ must also be positive definite.
 
 }

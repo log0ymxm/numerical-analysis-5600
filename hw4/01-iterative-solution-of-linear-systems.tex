@@ -11,7 +11,7 @@ x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k]} \right)
 \textbf{Gauss-Seidel:}
 \[
 x_i^{[k+1]} = \frac{1}{a_{ii}} \left(
-b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]}
+b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k+1]} - \sum_{j=i+1}^n a_{ij} x_j^{[k]}
 \right)
 \]
 
@@ -20,7 +20,7 @@ b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]}
 x_i^{[k+1]} =
 (1 - w)x_i^{[k]} + \frac{w}{a_{ii}}
 \left(
-b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]}
+b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{[k+1]} - \sum_{j=i+1}^n a_{ij} x_j^{[k]}
 \right)
 \]
 
@@ -62,46 +62,47 @@ x^{[k+1] }&= D^{-1} \left( b - L x^{[k]} - U x^{[k]} \right) \\
 &= -D^{-1} \left( L + U \right) x^{[k]} + D^{-1} b \\
 \end{align*}
 \begin{align*}
-\Rightarrow T &= -D^{-1} \left( L + U \right) \\
+\Rightarrow
+T &= -D^{-1} \left( L + U \right) \\
 c &= D^{-1} b
 \end{align*}
 
 \textbf{Gauss-Seidel:}
 \begin{align*}
 x_i^{[k+1]} &= \frac{1}{a_{ii}} \left(b_i - \sum_{j=1}^{i-1} a_{ij}
-x_j^{[k]} - \sum_{j=i+1}^n a_{ij} x_j^{[k+1]} \right) \\
-x^{[k+1] }&= D^{-1} \left( b - L x^{[k]} - U x^{[k+1]} \right) \\
-x^{[k+1] }&= D^{-1} b - D^{-1} L x^{[k]} - D^{-1} U x^{[k+1]}  \\
-(I + D^{-1} U) x^{[k+1]} &= D^{-1} b - D^{-1} L x^{[k]} \\
-x^{[k+1]} &= - (I + D^{-1} U)^{-1} D^{-1} L x^{[k]} + (I + D^{-1} U)^{-1} D^{-1} b  \\
+x_j^{[k+1]} - \sum_{j=i+1}^n a_{ij} x_j^{[k]} \right) \\
+x^{[k+1] }&= D^{-1} \left( b - L x^{[k+1]} - U x^{[k]} \right) \\
+x^{[k+1] }&= D^{-1} b - D^{-1} L x^{[k+1]} - D^{-1} U x^{[k]}  \\
+(I + D^{-1} L) x^{[k+1]} &= D^{-1} b - D^{-1} U x^{[k]} \\
+x^{[k+1]} &= - (I + D^{-1} L)^{-1} D^{-1} U x^{[k]} + (I + D^{-1} L)^{-1} D^{-1} b  \\
 \end{align*}
 \begin{align*}
 \Rightarrow
-T &= - (I + D^{-1} U)^{-1} D^{-1} L \\
-c &= (I + D^{-1} U)^{-1} D^{-1} b
+T &= - (I + D^{-1} L)^{-1} D^{-1} U \\
+c &= (I + D^{-1} L)^{-1} D^{-1} b
 \end{align*}
 
 \textbf{Successive Overrelaxation:}
 
 \begin{align*}
 x_i^{[k+1]} &= (1 - w)x_i^{[k]} + \frac{w}{a_{ii}} \left(b_i
-- \sum_{j=1}^{i-1} a_{ij} x_j^{[k]} - \sum_{j=i+1}^n a_{ij}
-x_j^{[k+1]} \right) \\
+- \sum_{j=1}^{i-1} a_{ij} x_j^{[k+1]} - \sum_{j=i+1}^n a_{ij}
+x_j^{[k]} \right) \\
 x^{[k+1]} &= \left(1-\omega\right) x^{[k]} + \omega D^{-1} \left( b -
-L x^{[k]} - U x^{[k+1]}\right) \\
+L x^{[k+1]} - U x^{[k]}\right) \\
 &= \left( 1 - \omega \right) x^{[k]} + \omega D^{-1} b - \omega
-D^{-1} L x^{[k]} - \omega D^{-1} U x^{[k+1]} \\
-\left( I + \omega D^{-1} U \right) x^{[k+1]} &= \left( \left( 1
-- \omega \right)  - \omega D^{-1} L \right)  x^{[k]} + \omega D^{-1} b \\
-x^{[k+1]} &= \left( I + \omega D^{-1} U \right)^{-1} \left( \left( 1
-- \omega \right) - \omega D^{-1} L \right) x^{[k]} + \left( I
-+ \omega D^{-1} U \right) \omega D^{-1} b
+D^{-1} L x^{[k+1]} - \omega D^{-1} U x^{[k]} \\
+\left( I + \omega D^{-1} L \right) x^{[k+1]} &= \left( \left( 1
+- \omega \right)  - \omega D^{-1} U \right)  x^{[k]} + \omega D^{-1} b \\
+x^{[k+1]} &= \left( I + \omega D^{-1} L \right)^{-1} \left( \left( 1
+- \omega \right) - \omega D^{-1} U \right) x^{[k]} + \left( I
++ \omega D^{-1} L \right)^{-1} \omega D^{-1} b
 \end{align*}
 \begin{align*}
 \Rightarrow
-T &= \left( I + \omega D^{-1} U \right)^{-1} \left( \left( 1
-- \omega \right) - \omega D^{-1} L \right)\\
-c &= \left( I + \omega D^{-1} U \right) \omega D^{-1}
+T &= \left( I + \omega D^{-1} L \right)^{-1} \left( \left( 1
+- \omega \right) - \omega D^{-1} U \right) \\
+c &= \left( I + \omega D^{-1} L \right)^{-1} \omega D^{-1}
 \end{align*}
 
 }

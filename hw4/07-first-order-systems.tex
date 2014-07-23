@@ -14,8 +14,63 @@ y(a) &= y_0.
 problems are equivalent. Of course, $y$ will have different meanings
 for the two problems.)
 
-{\color{blue}
 
+{\color{blue}
+\begin{align*}
+
+y'&=xy^2\\
+y(0)&=1\\
+y'(0)&=2\\
+Let\, z&=y' \, and \, z(0)=2\\
+\Rightarrow z'&=xy^2, y(0)=1, z(0)=2\\
+
+\frac{\partial y}{\partial x}&=z, y(0)=1\\
+\frac{\partial z}{\partial x}&=xy^2, z(0)=2\\
+\Rightarrow Define\, x&=x(t)\, s.t.\frac{\partial x}{\partial t}=1\\
+and\,x(0)&=0\\
+\Rightarrow \frac{\partial y}{\partial x}&=\frac{\partial y}{\partial x}\frac{\partial x}{\partial t}=z\\
+\frac{\partial z}{\partial t}&=\frac{\partial z}{\partial x}\frac{\partial x}{\partial t}=x(t)y^2(t)\\
+\Rightarrow \frac{\partial x}{\partial t}&=1, x(0)=0\\
+\frac{\partial y}{\partial t}&=z(t), y(x(0))=1\\
+\frac{\partial z}{\partial t}&=x(t)y^2(t), z(x(0))=2\\
+
+v&=\begin{bmatrix}
+x(t)\\ 
+y(t)\\ 
+z(t)
+\end{bmatrix}, 
+
+f(v)=\begin{bmatrix}
+v\\ 
+ve_3\\ 
+(ve_1)(ve_2)^2
+\end{bmatrix}\\
+
+Where \, e_1, e_2, e_3\, are\, the\, &basis\, vectors\,
+\begin{bmatrix}
+1\\ 
+0\\ 
+0
+\end{bmatrix},
+\begin{bmatrix}
+0\\ 
+1\\ 
+0
+\end{bmatrix}, 
+\begin{bmatrix}
+0\\ 
+0\\ 
+1
+\end{bmatrix}
+respectively\\
+
+\frac{\partial v}{\partial t}=f(v), v(0)=\begin{bmatrix}
+0\\ 
+1\\ 
+2
+\end{bmatrix}
+
+\end{align}
 
 
 }

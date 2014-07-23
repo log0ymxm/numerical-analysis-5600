@@ -6,7 +6,7 @@
 \le
 \|A\| \|A^{-1}\|
 \frac{\|r\|} {\|b\|}
-\] and show that how we derived these inequalities in class.
+\] and show how we derived these inequalities in class.
 
 \begin{itemize}
 \item For a general matrix $A$, and $\| \cdot \| = \| \cdot \|_2$,
@@ -15,3 +15,96 @@
   Do the same for the left hand inequality in (3).
 \item Repeat part a. for $\| \cdot \| = \| \cdot \|_\infty$.
 \end{itemize}
+
+{\color{blue}
+
+$\frac{\| e \|}{\| x \|}$ is the relative error of our linear system,
+which may not be computable.
+$\frac{\| r \|}{\| b \|}$ is a computable value that we can combine
+with the condition number $\| A \| \| A^{-1} \|$ to estimate what the
+relative error of our system is.
+
+We say that our system is ill-conditioned if it has a large value for
+the condition number, which would mean that the above inequality
+doesn't confine the relative error very well. It's well-conditioned
+system if the condition number is low, and we can see that the
+inequality will give us a narrow bounds and a better estimation of the
+relative error.
+
+To derive these equations we have the following equations from our
+linear system,
+
+\begin{align*}
+Ax &= b \\
+A^{-1}b &= x \\
+Ae &= r \\
+A^{-1}r &= e
+\end{align*}
+
+Where $e$ is our error $x - \hat{x}$ therefore $r$ is a relation of
+the error and our system.
+
+Using the Cauchy-Schwarz inequality we know that the norms of the
+above equations follow these inequalities,
+\begin{align*}
+\| b \| &\le \| A \| \| x \| \\
+\| x \| &\le \| A^{-1} \| \| b \| \\
+\| r \| &\le \| A \| \| e \| \\
+\| e \| &\le \| A^{-1} \| \| r \| \\
+\end{align*}
+
+We can divide the first inequality from the fourth and the second from
+the third (we take the reciprocal reversing the inequality and multiply) to arrive at
+\begin{align*}
+\frac{\| e \|}{\| A \| \|x \|} &\le \frac{\| A^{-1} \| \| r \|}{\| b \|} \\
+\frac{\| r \|}{\| A^{-1} \| \| b \|} &\le \frac{\| A \| \| e \|}{\| x \|} \\
+\end{align*}
+
+Now with the new set of inequalities we multiply the first by $\|
+A \|$ and the second by $\frac{1}{\| A\|}$ to get to the original inequality,
+\begin{align*}
+\frac{1} {\|A\| \|A^{-1}\|} \frac{\|r\|} {\|b\|}
+\le
+\frac{\|A\|\|e\|}{\| A\|\|x\|}
+\le
+\|A\| \|A^{-1}\| \frac{\|r\|} {\|b\|} \\
+\Rightarrow \frac{1} {\|A\| \|A^{-1}\|} \frac{\|r\|} {\|b\|}
+\le
+\frac{\|e\|}{\|x\|}
+\le
+\|A\| \|A^{-1}\| \frac{\|r\|} {\|b\|}
+\end{align*}
+
+For $\| \cdot \| = \| \cdot \|_2$ we have that
+$\| A \| = \max_{Ax = \lambda x} \{\lambda\} = \lambda_1$ or
+the square root of the largest eigenvalue, thus
+the norm of $A^{-1}$ will be one over the square root of the smallest eigenvalue
+$\| A^{-1} \| = \frac{1}{\min_{Ax = \lambda x} \{\lambda\}}
+= \frac{1}{\lambda_n}$ since the eigenvalues of an
+inverted matrix are reciprocals. Now our condition number is
+$ \|A\| \|A^{-1}\| = \frac{\lambda_1}{\lambda_n}$, and our
+relative error is bounded by,
+
+\begin{align*}
+\frac{\lambda_n}{\lambda_1}
+ \frac{\|r\|} {\|b\|}
+\le
+\frac{\|e\|}{\|x\|}
+\le
+\frac{\lambda_1}{\lambda_n}
+ \frac{\|r\|} {\|b\|}
+\end{align*}
+
+Here inequality is achieved when $\lambda_1 = \lambda_n$. We can find
+this case trivially with the identity matrix, i.e.
+$A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$.
+
+With $\| \cdot \| = \| \cdot \|_{\infty}$ our matrix norm is
+$\| A \| = \max\{ \|a_{ij}\| \} = a_{\max} $ and
+$\| A^{-1} \| = \frac{1}{ \min\{\|a_{ij}\|\} } = \frac{1}{a_{\min}}$. This means that our
+condition number is
+$ \|A\| \|A^{-1}\| = \frac{a_{\max}}{a_{\min}} $, and our inequality will
+have the case of equality when $a_{\max} = a_{\min}$. An example of this
+is $A = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$.
+
+}

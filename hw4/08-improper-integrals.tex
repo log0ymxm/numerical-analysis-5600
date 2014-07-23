@@ -14,6 +14,53 @@ Gaussian Quadrature formula \[
 
 {\color{blue}
 
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{clojure}
+(def I (* 2 Math/PI
+           (Math/log (/ (+ 1 (Math/sqrt 2))
+                        2))))
 
+(defn gaussian-quadrature [f n]
+  (* (/ Math/PI n)
+     (->> (range n)
+          (map inc)
+          (map #(f (Math/cos (/ (* (- (* 2 %) 1)
+                                   Math/PI)
+                                (* 2 n)))))
+          (apply +))))
 
+(def n (range 4 9))
+
+(def results (map #(gaussian-quadrature (fn [x]
+                                          (Math/log (+ (Math/pow x 2) 1)))
+                                        %)
+                  n))
+;; => (1.1840219784143866
+;;     1.1824745448480443
+;;     1.182688104009816
+;;     1.1826574630224815
+;;     1.1826619812548276)
+
+(def error (->> results
+                (map #(Math/abs (- I %)))
+                (zipmap [4 5 6 7 8])))
+;; => {4 0.0013605869242299118,
+;;     5 1.8684664211243707E-4,
+;;     6 2.6712519659355394E-5,
+;;     7 3.92846767516275E-6,
+;;     8 5.897646708774573E-7}
+\end{minted}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65]{improper-integrals-error.png}
+\caption{Error for $n=4,5,6,7,8$.}
+\end{figure}
+
+We can see that our error decreases for larger values of $n$ and
+approaches $0$ quickly. Even for $n=4$ it's accurate.
 }

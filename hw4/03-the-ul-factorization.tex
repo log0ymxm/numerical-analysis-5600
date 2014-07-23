@@ -11,7 +11,13 @@ that conceptually there is no difference between an $LU$ and a $UL$
 factorization).
 
 {\color{blue}
-
+Consider the permutation matrix, P s.t.\\
+$A^{T}&=PAP^{T}$\\
+Then, $PP^{T}&=P^{T}P=I$\\
+Consider $A^{T}&=PAP^{T}=L_0U_0$, where L_0U_0 is the LU decomposition of A^{T}\\
+If U=L_{0}^{T} and L=U_{0}^{T}, L_0U_0=PUP^{T}PLP^{T}=PULP^{T}=PAP^{T}\\
+\Rightarrow A=UL Since U and L both have 1's along the diagonals,\\
+Ax=ULx=b can be written as Lx=y, and Uy=b
 
 
 }

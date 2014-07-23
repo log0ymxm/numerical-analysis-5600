@@ -76,22 +76,22 @@ A \|$ and the second by $\frac{1}{\| A\|}$ to get to the original inequality,
 \end{align*}
 
 For $\| \cdot \| = \| \cdot \|_2$ we have that
-$\| A \| = \max_{Ax = \lambda x} \{\lambda\} = \lambda_1$ or
+$\| A \| = \max_{Ax = \lambda x} \{\lambda\} = \sqrt{\lambda_1}$ or
 the square root of the largest eigenvalue, thus
 the norm of $A^{-1}$ will be one over the square root of the smallest eigenvalue
 $\| A^{-1} \| = \frac{1}{\min_{Ax = \lambda x} \{\lambda\}}
-= \frac{1}{\lambda_n}$ since the eigenvalues of an
+= \sqrt{\frac{1}{\lambda_n}}$ since the eigenvalues of an
 inverted matrix are reciprocals. Now our condition number is
-$ \|A\| \|A^{-1}\| = \frac{\lambda_1}{\lambda_n}$, and our
+$ \|A\| \|A^{-1}\| = \sqrt{\frac{\lambda_1}{\lambda_n}}$, and our
 relative error is bounded by,
 
 \begin{align*}
-\frac{\lambda_n}{\lambda_1}
+\sqrt{\frac{\lambda_n}{\lambda_1}}
  \frac{\|r\|} {\|b\|}
 \le
 \frac{\|e\|}{\|x\|}
 \le
-\frac{\lambda_1}{\lambda_n}
+\sqrt{\frac{\lambda_1}{\lambda_n}}
  \frac{\|r\|} {\|b\|}
 \end{align*}
 
